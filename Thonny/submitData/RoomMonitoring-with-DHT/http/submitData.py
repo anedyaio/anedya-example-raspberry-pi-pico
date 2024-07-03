@@ -133,7 +133,11 @@ def anedya_submitData(param_variable_identifier: str, param_variable_value: floa
         print("Data pushed to anedya could!!")
     else:
         print("Failed to push data!!")
-        print(response.text)
+        error_code=json.loads(response.text).get('errorcode')
+        if error_code ==4020:
+            print("Error: Unknown variable identifier!!")
+        else:
+            print(response.text)
     response.close()  # Close the response to free resources
 
 
