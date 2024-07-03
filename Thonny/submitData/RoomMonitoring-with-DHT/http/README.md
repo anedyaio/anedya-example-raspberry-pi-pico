@@ -2,7 +2,7 @@
 
 # Room Monitoring - Submit-data-with-Pico+DHT (http)
 
-This  file allows you to connect your device to a WiFi network and send data to a server. It fetches the server time and sends data to the anedya.
+This  file allows you to connect your device to a WiFi network and send data to a Anedya. It fetches the server time and sends data to the anedya.
 
 
 > [!WARNING]
