@@ -17,12 +17,11 @@ To get started with the examples:
 
 1. Choose the code, create the .py file, and upload it in the pico space.
 2. Fill in your Wi-Fi credentials, physical device ID, and connection key (obtained from the dashboard).
-3. Upload the .cer file(Anedya ca-certificate) in the certs folder of pico. Obtain it from Anedya Documentation, (click here)[https://docs.anedya.io/device/mqtt-endpoints/#tls]
+3. Upload the .cer file(Anedya ca-certificate) in the certs folder of pico. Obtain it from Anedya Documentation, [click here](https://docs.anedya.io/device/mqtt-endpoints/#tls)
    - Download `Anedya Root CA 1 (RSA - 2048)` `DER` file.
    - move it from Download folder to `C:\certs` in you local pc c drive.
    ![upload-doc](/Thonny/basic-home-automation/pico/doc/upload_cert_in_thonny.png)
    - Now, open thonny and upload cert folder in pico space.
-
 
 
 ## Usage
@@ -59,10 +58,6 @@ streamlit run Home.py
 
 ```
 This will launch the dashboard in your default web browser. [Host it on the streamlit cloud](https://github.com/anedyaio/anedya-streamlit-dashboard-example/blob/main/README.md#hosting-on-streamlit-cloud)
-
-## Dependencies
-
-
 
 
 ## Documentation
