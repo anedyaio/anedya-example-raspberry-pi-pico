@@ -1,3 +1,22 @@
+"""
+                                              Basic Home Automation with Anedya
+
+                            # Dashboard Setup
+                             - create account and login to the dashboard
+                             - Create project.
+                             - Create a node (e.g., for home:-Room1 or study room).
+                             - Create variables: temperature and humidity.
+                            Note: Variable Identifier is essential; fill it accurately.
+
+                            # Hardware Setup
+                             -Add relay for the light at pin 17
+                             -Add relay for the fan at pin 18
+                             -Add dht sensor at pin 16
+                                                          
+                    Note: The code is tested on the "Raspberry Pi Pico W"
+
+                                                                                           Dated: 3-July-2024
+"""
 import network
 import ujson as json
 import time
@@ -8,27 +27,26 @@ from machine import Pin
 import random
 from dht import DHT11
 
+#-------------------------- settings --------------------------------
 # Emulate Hardware Sensor?
-virtual_sensor = False
+virtual_sensor = True
 
-# Anedya Connection Key
-CONNECTION_KEY = b"CONNECTION_KEY"
-# Physical Device ID
-PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"
+#------------------------ anedya essential credentials ----------------
+REGION_CODE = "ap-in-1"  # Anedya region code (e.g., "ap-in-1" for Asia-Pacific/India) | For other country code, visity [https://docs.anedya.io/device/#region]
+CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
+PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
+# ------------------WiFi Credentials -------------
+SSID = "SSID"  # SSID of the WiFi network
+PASSWORD = "PASSWORD"  # Password of the WiFi network
 
-# WiFi Credentials
-SSID = 'SSID'  # SSID of the WiFi network
-PASSWORD = 'PASSWORD'  # Password of the WiFi network
 
-# Anedya Broker
-broker = "mqtt.ap-in-1.anedya.io"
-
+#----------------------- MQTT varaibles --------------------------------
 # Publish Topic
 PUBLISH_TOPIC = f'$anedya/device/{PHYSICAL_DEVICE_ID}/submitdata/json'.encode('ASCII')
-
 # Update Status Topic
 UPDATE_STATUS_TOPIC = f'$anedya/device/{PHYSICAL_DEVICE_ID}/commands/updateStatus/json'.encode('ASCII')
 
+#----------------------- sensor config --------------------------------
 # Sensor Pin
 dataPin = 16
 myPin = Pin(dataPin, Pin.OUT, Pin.PULL_DOWN)  # Initialize sensor pin
@@ -40,7 +58,7 @@ light = Pin(lightPin, Pin.OUT)  # Initialize light pin
 fanPin = 18
 fan = Pin(fanPin, Pin.OUT)  # Initialize fan pin
 
-# Command ID
+# ----------------- helper varaibles -----------------------------
 command_id = ""
 def main():
     """
@@ -57,6 +75,8 @@ def main():
     connect_to_wifi(ssid=SSID,password=PASSWORD)
 
     # Connecting to Anedya broker....
+    # Anedya Broker
+    broker = f"mqtt.{REGION_CODE}.anedya.io"
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)  # Create SSL context
     context.load_verify_locations(cafile='/certs/anedya_rca.cer')  # Load CA certificate
     client = MQTTClient(client_id=PHYSICAL_DEVICE_ID,  # Create MQTT client
@@ -117,7 +137,7 @@ def main():
                 temperature = sensor.temperature()
                 humidity = sensor.humidity()
         
-            # Create payload for temperature
+            print("=============================================")
             # Create payload for temperature
             payload_temp = json.dumps({  # Dictionary containing temperature data
                 "data": [  # List containing temperature data
@@ -142,6 +162,7 @@ def main():
             })
             print(f"Humidity :{humidity}%")  # Print humidity
             client.publish(PUBLISH_TOPIC ,payload_hum,qos=0)  # Publish humidity payload
+            print("=============================================")
         if False:  # Example of blocking wait for message
             client.wait_msg()
         else:  # Example of non-blocking wait for message

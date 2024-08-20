@@ -30,7 +30,7 @@ virtual_sensor = True
 
 # ---------------------- Anedya essential credentials ----------------------
 REGION_CODE = "ap-in-1"
-CONNECTION_KEY = "CONNECTION_KEY"  # Fil your Connection Key
+CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
 PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
 #  ----------------WiFi Credentials-----------------------
 SSID = "SSID"  # SSID of the WiFi network

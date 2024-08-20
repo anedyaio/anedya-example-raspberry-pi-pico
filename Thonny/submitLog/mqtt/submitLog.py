@@ -33,7 +33,7 @@ virtual_sensor = True
 
 # ----------------------- anedya essentials credentials --------------------------------
 REGION_CODE = "ap-in-1"  # Anedya region code (e.g., "ap-in-1" for Asia-Pacific/India) | For other country code, visity [https://docs.anedya.io/device/#region]
-CONNECTION_KEY = "CONNECTION_KEY"  # Fil your Connection Key
+CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
 PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
 #  ----------------WiFi Credentials-----------------------
 SSID = "SSID"  # SSID of the WiFi network
