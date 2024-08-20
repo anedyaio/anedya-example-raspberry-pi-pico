@@ -4,6 +4,18 @@
 
 This micropython script allows you to submit your device log to the Anedya.
 
+## Getting Started
+
+To get started with the examples:
+
+1. Choose the code, create the .py file, and upload it in the pico space.
+2. Fill in your Wi-Fi credentials, physical device ID, and connection key (obtained from the dashboard).
+3. Upload the .cer file(Anedya ca-certificate) in the certs folder of pico. Obtain it from Anedya Documentation, [click here](https://docs.anedya.io/device/mqtt-endpoints/#tls)
+   - Download `Anedya Root CA 1 (RSA - 2048)` `DER` file.
+   - move it from Download folder to `C:\certs` in you local pc c drive.
+   ![upload-doc](/Thonny/basic-home-automation/pico/doc/upload_cert_pico.png)
+   - Now, open thonny and upload cert folder in pico space.
+
 ## Set-Up Project in Anedya Dashboard
 
 Following steps outline the overall steps to setup a project. You can read more about the steps [here](https://docs.anedya.io/getting-started/quickstart/#create-a-new-project)
