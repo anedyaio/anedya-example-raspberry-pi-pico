@@ -13,7 +13,6 @@ virtual_sensor = False
 
 # Anedya Connection Key
 CONNECTION_KEY = b"CONNECTION_KEY"
-
 # Physical Device ID
 PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"
 
@@ -22,7 +21,7 @@ SSID = 'SSID'  # SSID of the WiFi network
 PASSWORD = 'PASSWORD'  # Password of the WiFi network
 
 # Anedya Broker
-broker = b"mqtt.ap-in-1.anedya.io"
+broker = "mqtt.ap-in-1.anedya.io"
 
 # Publish Topic
 PUBLISH_TOPIC = f'$anedya/device/{PHYSICAL_DEVICE_ID}/submitdata/json'.encode('ASCII')

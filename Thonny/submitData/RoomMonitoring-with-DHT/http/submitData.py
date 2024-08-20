@@ -1,3 +1,22 @@
+""""
+                            Room Monitoring Using Raspberry pi pico + DHT sensor (http)
+                Disclaimer: This code is for hobbyists for learning purposes. Not recommended for production use!!
+
+                            # Dashboard Setup
+                             - Create account and login to the dashboard
+                             - Create new project.
+                             - Create variables: temperature and humidity.
+                             - Create a node (e.g., for home- Room1 or study room).
+                            Note: Variable Identifier is essential; fill it accurately.
+
+                            # Hardware Setup
+                             - connect the dht sensor to pin 16
+
+                  Note: The code is tested on the "Raspberry Pi Pico W"
+
+                                                                                           Dated: 3-July-2024
+
+"""
 import network
 import urequests as requests
 import ujson as json
@@ -8,7 +27,7 @@ from dht import DHT11
 from machine import Pin
 
 # Emulate Hardware Sensor?
-virtual_sensor = False
+virtual_sensor = True
 
 REGION_CODE="ap-in-1"
 CONNECTION_KEY = "CONNECTION_KEY"
@@ -17,8 +36,8 @@ PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"
 SSID = 'ssid'
 PASSWORD = 'password'
 
-dataPin=16
-myPin=Pin(dataPin,Pin.OUT,Pin.PULL_DOWN)
+dht_pin=16
+myPin=Pin(dht_pin,Pin.OUT,Pin.PULL_DOWN)
 sensor=DHT11(myPin)
 
 def main():
@@ -26,7 +45,6 @@ def main():
     anedya_set_device_time()
 
     while True :
-        
         if virtual_sensor:
             temperature = random.randint(1, 50) 
             humidity =random.randint(10, 70)
@@ -43,7 +61,6 @@ def main():
         print(f"Temperature :{temperature}°C")
         anedya_submitData("temperature",temperature)
 
-        
         time.sleep(2)
 
 def connect_to_wifi(ssid, password):

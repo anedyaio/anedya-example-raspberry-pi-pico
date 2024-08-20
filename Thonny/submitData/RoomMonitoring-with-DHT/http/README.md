@@ -2,11 +2,7 @@
 
 # Room Monitoring - Submit-data-with-Pico+DHT (http)
 
-This  file allows you to connect your device to a WiFi network and send data to a Anedya. It fetches the server time and sends data to the anedya.
-
-
-> [!WARNING]
-> This code is for hobbyists for learning purposes. Not recommended for production use!!
+This micropython script allows you to connect your device to a WiFi network and send data to a server. It fetches the live time from the anedya server to synchronize the device time and sends data to the anedya.
 
 ## Set-Up Project in Anedya Dashboard
 
