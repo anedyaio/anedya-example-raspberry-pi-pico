@@ -44,7 +44,7 @@ dht_pin = 16
 myPin = Pin(dht_pin, Pin.OUT, Pin.PULL_DOWN)
 sensor = DHT11(myPin)
 
-#---------------- Helper varaibles -----------------------------
+#---------------- Helper variables -----------------------------
 counter = 0
 
 def main():
