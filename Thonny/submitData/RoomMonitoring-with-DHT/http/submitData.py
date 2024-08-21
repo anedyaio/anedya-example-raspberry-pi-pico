@@ -26,16 +26,19 @@ import random
 from dht import DHT11
 from machine import Pin
 
+#--------------------------------- settings --------------------------------
 # Emulate Hardware Sensor?
 virtual_sensor = True
 
-REGION_CODE="ap-in-1"
-CONNECTION_KEY = "CONNECTION_KEY"
-PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"
-# WiFi credentials
-SSID = 'ssid'
-PASSWORD = 'password'
+# ----------------------- anedya essentials credentials --------------------------------
+REGION_CODE = "ap-in-1"  # Anedya region code (e.g., "ap-in-1" for Asia-Pacific/India) | For other country code, visity [https://docs.anedya.io/device/#region]
+CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
+PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
+#  ----------------WiFi Credentials-----------------------
+SSID = "SSID"  # SSID of the WiFi network
+PASSWORD = "PASSWORD"  # Password of the WiFi network
 
+#---------------------------- sensor config --------------------------------
 dht_pin=16
 myPin=Pin(dht_pin,Pin.OUT,Pin.PULL_DOWN)
 sensor=DHT11(myPin)
@@ -147,7 +150,7 @@ def anedya_submitData(param_variable_identifier: str, param_variable_value: floa
 
     # Optional: Print the response for debugging
     if response.status_code == 200:
-        print("Data pushed to anedya could!!")
+        print("Data pushed to anedya cloud!!")
     else:
         print("Failed to push data!!")
         error_code=json.loads(response.text).get('errorcode')
