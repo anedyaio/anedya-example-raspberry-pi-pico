@@ -16,7 +16,6 @@
 
                                                                                            Dated: 20-August-2024
 """
-
 import network
 import ujson as json
 import time
