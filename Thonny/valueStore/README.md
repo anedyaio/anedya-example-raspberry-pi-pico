@@ -10,11 +10,11 @@ ValueStore is a highly available and consistent key-value store designed specifi
 
 ## Operation
 ### Read Operations​
-- Node-Level Scope: A node can read data from its own namespace (matching node ID).
-- Global Scope: All nodes can read data from any global namespace. This facilitates access to shared data sets across the entire system.
+- **Node-Level Scope:** A node can read data from its own namespace (matching node ID).
+- **Global Scope:** All nodes can read data from any global namespace. This facilitates access to shared data sets across the entire system.
 ### Write Operations
-- Node-Level Scope: A node can only write data to its own namespace (matching node ID). This restricts nodes from modifying data belonging to other devices or global namespaces.
-- Global Scope: Only applications can write to or modify global namespaces using Platform APIs or the Anedya Dashboard. This ensures controlled modification of shared data sets to maintain data integrity.
+- **Node-Level Scope:** A node can only write data to its own namespace (matching node ID). This restricts nodes from modifying data belonging to other devices or global namespaces.
+- **Global Scope:** Only applications can write to or modify global namespaces using Platform APIs or the Anedya Dashboard. This ensures controlled modification of shared data sets to maintain data integrity.
 
 
 ## Documentation

@@ -8,8 +8,8 @@
 
 ## Operation
 ### Write Operations (set)
-- Node-Level Scope: A node can only write data to its own namespace (matching node ID). This restricts nodes from modifying data belonging to other devices or global namespaces.
-- Global Scope: Only applications can write to or modify global namespaces using Platform APIs or the Anedya Dashboard. This ensures controlled modification of shared data sets to maintain data integrity.
+- **Node-Level Scope:** A node can only write data to its own namespace (matching node ID). This restricts nodes from modifying data belonging to other devices or global namespaces.
+- **Global Scope:** Only applications can write to or modify global namespaces using Platform APIs or the Anedya Dashboard. This ensures controlled modification of shared data sets to maintain data integrity.
 
 ## Documentation
 
