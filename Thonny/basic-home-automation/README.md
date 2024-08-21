@@ -28,7 +28,7 @@ To get started with the examples:
  
 ### anedya-streamlit-dashboard-example setup
 
-![Image](https://github.com/anedyaio/anedya-streamlit-dashboard-example/blob/main/docs/anedya_dashboard.png)
+![Image](https://github.com/anedyaio/anedya-streamlit-dashboard-example/blob/main/docs/main_dash.png)
 
 
 1. Clone the Repository:
