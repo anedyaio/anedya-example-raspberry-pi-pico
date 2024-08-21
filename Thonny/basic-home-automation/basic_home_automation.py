@@ -1,21 +1,21 @@
 """
-                                Basic Home Automation with Anedya
+                                            Basic Home Automation with Anedya
 
-                            # Dashboard Setup
-                             - create account and login to the dashboard
-                             - Create project.
-                             - Create a node (e.g., for home:-Room1 or study room).
-                             - Create variables: temperature and humidity.
-                            Note: Variable Identifier is essential; fill it accurately.
+                                        # Dashboard Setup
+                                        - create account and login to the dashboard
+                                        - Create project.
+                                        - Create a node (e.g., for home:-Room1 or study room).
+                                        - Create variables: temperature and humidity.
+                                        Note: Variable Identifier is essential; fill it accurately.
 
-                            # Hardware Setup
-                             -Add relay for the light at pin 17
-                             -Add relay for the fan at pin 18
-                             -Add dht sensor at pin 16
-                                                          
-                    Note: The code is tested on the "Raspberry Pi Pico W"
+                                        # Hardware Setup
+                                        -Add relay for the light at pin 17
+                                        -Add relay for the fan at pin 18
+                                        -Add dht sensor at pin 16
+                                                                    
+                                Note: The code is tested on the "Raspberry Pi Pico W"
 
-                                                                                           Dated: 3-July-2024
+                                                                                                    Dated: 3-July-2024
 """
 import network
 import ujson as json
