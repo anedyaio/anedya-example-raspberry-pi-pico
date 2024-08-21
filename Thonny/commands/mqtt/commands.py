@@ -6,17 +6,14 @@
                              - create account and login to the dashboard
                              - Create project.
                              - Create a node (e.g., for home- Room1 or study room).
-                             - Create variables: temperature and humidity.
-                            Note: Variable Identifier is essential; fill it accurately.
 
                             # Hardware Setup
-                            - connect sensor signal pin to D5
                             - connect light relay control pin to 17
                             - connect fan relay control pin to 18
 
-                  Note: The code is tested on the "Esp-32 Wifi, Bluetooth, Dual Core Chip Development Board (ESP-WROOM-32)"
+                    Note: The code is tested on the "Raspberry Pi Pico W"
 
-                                                                                           Dated: 28-March-2024
+                                                                                           Dated: 20-August-2024
 
 """
 import network
