@@ -1,6 +1,6 @@
 [<img src="https://img.shields.io/badge/Anedya-Documentation-blue?style=for-the-badge">](https://docs.anedya.io?utm_source=github&utm_medium=link&utm_campaign=github-examples&utm_content=pico)
 
-# Room Monitoring - ESP32+DHT (Submit-Log) (mqtt)
+# Room Monitoring - Pico W+DHT (Submit-Log) (mqtt)
 
 This micropython script allows you to submit your device log to the Anedya.
 
@@ -13,7 +13,7 @@ To get started with the examples:
 3. Upload the .cer file(Anedya ca-certificate) in the certs folder of pico. Obtain it from Anedya Documentation, [click here](https://docs.anedya.io/device/mqtt-endpoints/#tls)
    - Download `Anedya Root CA 1 (RSA - 2048)` `DER` file.
    - move it from Download folder to `C:\certs` in you local pc c drive.
-   ![upload-doc](/Thonny/basic-home-automation/pico/doc/upload_cert_pico.png)
+   ![upload-doc](/Thonny/submitLog/mqtt/doc/upload_cert_pico.png)
    - Now, open thonny and upload cert folder in pico space.
 
 ## Set-Up Project in Anedya Dashboard

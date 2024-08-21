@@ -1,8 +1,8 @@
 [<img src="https://img.shields.io/badge/Anedya-Documentation-blue?style=for-the-badge">](https://docs.anedya.io?utm_source=github&utm_medium=link&utm_campaign=github-examples&utm_content=pico)
 
-# Room Monitoring - ESP32+DHT (Submit-Log) (http)
+# Room Monitoring - Pico W +DHT (Submit-Log) (http)
 
-This micropython script allows you to submit your device log to the Anedya.
+This micro-python script allows you to submit your device log to the Anedya.
 
 ## Set-Up Project in Anedya Dashboard
 

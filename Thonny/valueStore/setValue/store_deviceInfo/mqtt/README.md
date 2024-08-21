@@ -2,7 +2,7 @@
 
 # Store-Device-Info - Example (mqtt)
 
-This micropython script allows you to set the your value to the anedya dashboard.
+This micropython script allows you to set the your value to the anedya.
 
 ## Getting Started
 
@@ -13,7 +13,7 @@ To get started with the examples:
 3. Upload the .cer file(Anedya ca-certificate) in the certs folder of pico. Obtain it from Anedya Documentation, [click here](https://docs.anedya.io/device/mqtt-endpoints/#tls)
    - Download `Anedya Root CA 1 (RSA - 2048)` `DER` file.
    - move it from Download folder to `C:\certs` in you local pc c drive.
-   ![upload-doc](/Thonny/basic-home-automation/pico/doc/upload_cert_pico.png)
+   ![upload-doc](/Thonny/valueStore/setValue/store_deviceInfo/mqtt/doc/upload_cert_pico.png)
    - Now, open thonny and upload cert folder in pico space.
 
 ## Set-Up Project in Anedya Dashboard

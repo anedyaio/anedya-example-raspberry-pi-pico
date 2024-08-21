@@ -2,7 +2,7 @@
 
 # Store-Device-Info - Example (http)
 
-This micropython script allows you to set the your value to the anedya dashboard.
+This micro-python script allows you to set the your value to the anedya.
 
 ## Set-Up Project in Anedya Dashboard
 
