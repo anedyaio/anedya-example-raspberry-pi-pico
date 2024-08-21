@@ -1,5 +1,5 @@
 """
-                                              Basic Home Automation with Anedya
+                                Basic Home Automation with Anedya
 
                             # Dashboard Setup
                              - create account and login to the dashboard
@@ -31,16 +31,15 @@ from dht import DHT11
 # Emulate Hardware Sensor?
 virtual_sensor = True
 
-#------------------------ anedya essential credentials ----------------
+# ----------------------- anedya essentials credentials --------------------------------
 REGION_CODE = "ap-in-1"  # Anedya region code (e.g., "ap-in-1" for Asia-Pacific/India) | For other country code, visity [https://docs.anedya.io/device/#region]
 CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
 PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
-# ------------------WiFi Credentials -------------
+#  ----------------WiFi Credentials-----------------------
 SSID = "SSID"  # SSID of the WiFi network
 PASSWORD = "PASSWORD"  # Password of the WiFi network
 
-
-#----------------------- MQTT varaibles --------------------------------
+#----------------------- MQTT variables --------------------------------
 # Publish Topic
 PUBLISH_TOPIC = f'$anedya/device/{PHYSICAL_DEVICE_ID}/submitdata/json'.encode('ASCII')
 # Update Status Topic
@@ -58,7 +57,7 @@ light = Pin(lightPin, Pin.OUT)  # Initialize light pin
 fanPin = 18
 fan = Pin(fanPin, Pin.OUT)  # Initialize fan pin
 
-# ----------------- helper varaibles -----------------------------
+# ----------------- helper variables -----------------------------
 command_id = ""
 def main():
     """
@@ -85,7 +84,7 @@ def main():
                         user=PHYSICAL_DEVICE_ID,
                         password=CONNECTION_KEY,
                         ssl=context)  # Use SSL context for secure connection
-    client.set_callback(sub_cb)  # Set callback function for incoming messages
+    client.set_callback(callback)  # Set callback function for incoming messages
     resp = client.connect()  # Connect to broker
     if not resp:  # Check if connection was successful
         print("Connected to Anedya Broker")
@@ -150,6 +149,8 @@ def main():
             })
             print(f"Temperature :{temperature}°C")  # Print temperature
             client.publish(PUBLISH_TOPIC ,payload_temp,qos=0)  # Publish temperature payload
+            time.sleep(1)
+            client.check_msg()  # Check for incoming messages
             
             payload_hum = json.dumps({  # Dictionary containing humidity data
                 "data": [  # List containing humidity data
@@ -162,6 +163,8 @@ def main():
             })
             print(f"Humidity :{humidity}%")  # Print humidity
             client.publish(PUBLISH_TOPIC ,payload_hum,qos=0)  # Publish humidity payload
+            time.sleep(1)
+            client.check_msg()  # Check for incoming messages
             print("=============================================")
         if False:  # Example of blocking wait for message
             client.wait_msg()
@@ -198,7 +201,7 @@ def connect_to_wifi(ssid, password):
     else:
         print('Failed to connect to WiFi network.')
 
-def sub_cb(topic, msg):
+def callback(topic, msg):
     # Global variable to store command ID
     global command_id
 
@@ -209,7 +212,7 @@ def sub_cb(topic, msg):
     command = json.loads(msg).get("command")
     data = json.loads(msg).get("data")
     command_id = json.loads(msg).get("commandId")
-
+        
     # If the command is "Light" or "light"
     if command == "Light" or command == "light":
         # If the data is "on" or "ON"
@@ -238,10 +241,14 @@ def sub_cb(topic, msg):
             fan.value(0)
             print("Fan OFF")
 
+
+
 if __name__ == '__main__':
     # Call the main function
     main()
 
 
     
+
+
 
