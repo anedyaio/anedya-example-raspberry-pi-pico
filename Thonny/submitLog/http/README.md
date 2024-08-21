@@ -1,8 +1,8 @@
 [<img src="https://img.shields.io/badge/Anedya-Documentation-blue?style=for-the-badge">](https://docs.anedya.io?utm_source=github&utm_medium=link&utm_campaign=github-examples&utm_content=pico)
 
-# Room Monitoring - Submit-data-with-Pico+DHT (http)
+# Room Monitoring - Pico W +DHT (Submit-Log) (http)
 
-This micro-python script allows you to connect your device to a WiFi network and send data to a server. It fetches the live time from the anedya server to synchronize the device time and sends data to the anedya.
+This micro-python script allows you to submit your device log to the Anedya.
 
 ## Set-Up Project in Anedya Dashboard
 
@@ -18,6 +18,12 @@ Following steps outline the overall steps to setup a project. You can read more 
 
 > [!IMPORTANT]
 > Variable Identifier is essential; fill it accurately.
+
+## USAGES
+To submit the the log, use : 
+```
+anedya_submitLog("<REQUEST-ID>","<LOG-MESSAGE>","<Log Type>");
+```
 
 ## Hardware Set-Up
 

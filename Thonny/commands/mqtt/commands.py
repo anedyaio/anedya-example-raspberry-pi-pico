@@ -1,3 +1,21 @@
+"""" 
+                                            Smart Home (commands)(mqtt)
+                Disclaimer: This code is for hobbyists for learning purposes. Not recommended for production use!!
+
+                            # Dashboard Setup
+                             - create account and login to the dashboard
+                             - Create project.
+                             - Create a node (e.g., for home- Room1 or study room).
+
+                            # Hardware Setup
+                            - connect light relay control pin to 17
+                            - connect fan relay control pin to 18
+
+                    Note: The code is tested on the "Raspberry Pi Pico W"
+
+                                                                                           Dated: 20-August-2024
+
+"""
 import network
 import ujson as json
 import time
@@ -5,44 +23,31 @@ import utime
 import ssl
 from umqtt.simple import MQTTClient
 from machine import Pin
-import random
-from dht import DHT11
 
-# Emulate Hardware Sensor?
-virtual_sensor = False
+# ----------------------- anedya essentials credentials --------------------------------
+REGION_CODE = "ap-in-1"  # Anedya region code (e.g., "ap-in-1" for Asia-Pacific/India) | For other country code, visity [https://docs.anedya.io/device/#region]
+CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
+PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
+#  ----------------WiFi Credentials-----------------------
+SSID = "SSID"  # SSID of the WiFi network
+PASSWORD = "PASSWORD"  # Password of the WiFi network
 
-# Anedya Connection Key
-CONNECTION_KEY = b"CONNECTION_KEY"
-
-# Physical Device ID
-PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"
-
-# WiFi Credentials
-SSID = 'SSID'  # SSID of the WiFi network
-PASSWORD = 'PASSWORD'  # Password of the WiFi network
-
-# Anedya Broker
-broker = b"mqtt.ap-in-1.anedya.io"
-
-# Publish Topic
+# ----------------- MQTT Essentials --------------------------------
+broker = f"mqtt.{REGION_CODE}.anedya.io"
 PUBLISH_TOPIC = f'$anedya/device/{PHYSICAL_DEVICE_ID}/submitdata/json'.encode('ASCII')
-
-# Update Status Topic
 UPDATE_STATUS_TOPIC = f'$anedya/device/{PHYSICAL_DEVICE_ID}/commands/updateStatus/json'.encode('ASCII')
 
-# Sensor Pin
-dataPin = 16
-myPin = Pin(dataPin, Pin.OUT, Pin.PULL_DOWN)  # Initialize sensor pin
-sensor = DHT11(myPin)
-
+# ------------------- Sensor Config --------------------------------
 # Light and Fan Pins
 lightPin = 17
 light = Pin(lightPin, Pin.OUT)  # Initialize light pin
 fanPin = 18
 fan = Pin(fanPin, Pin.OUT)  # Initialize fan pin
 
-# Command ID
+# ------------------- helper variables -----------------------------
 command_id = ""
+command="" 
+data=""
 def main():
     """
     The main function that connects to the Anedya broker and subscribes to topics.
@@ -66,7 +71,7 @@ def main():
                         user=PHYSICAL_DEVICE_ID,
                         password=CONNECTION_KEY,
                         ssl=context)  # Use SSL context for secure connection
-    client.set_callback(sub_cb)  # Set callback function for incoming messages
+    client.set_callback(callback)  # Set callback function for incoming messages
     resp = client.connect()  # Connect to broker
     if not resp:  # Check if connection was successful
         print("Connected to Anedya Broker")
@@ -87,6 +92,33 @@ def main():
     while True:
         # Check if command_id exists
         if command_id:
+             # If the command is "Light" or "light"
+            if command == "Light" or command == "light":
+                # If the data is "on" or "ON"
+                if data == "on" or data == "ON":
+                    # Turn the light on
+                    light.value(1)
+                    print("Light ON")
+
+                # If the data is "off" or "OFF"
+                if data == "off" or data == "OFF":
+                    # Turn the light off
+                    print("Light OFF")
+                    light.value(0)
+
+            # If the command is "Fan" or "fan"
+            if command == "Fan" or command == "fan":
+                # If the data is "on" or "ON"
+                if data == "on" or data == "ON":
+                    # Turn the fan on
+                    fan.value(1)
+                    print("Fan ON")
+
+                # If the data is "off" or "OFF"
+                if data == "off" or data == "OFF":
+                    # Turn the fan off
+                    fan.value(0)
+                    print("Fan OFF")
             # Create status payload
             status_payload = json.dumps({
               "reqId": "",  # reqId is not used in this example
@@ -99,50 +131,7 @@ def main():
             client.publish(UPDATE_STATUS_TOPIC, status_payload, qos=0)
             # Reset command_id
             command_id = ""
-            
-        # Check if it's time to measure temperature and humidity
-        if utime.ticks_ms() - interval_time > 5000:  # interval
-            # Update interval time
-            interval_time = utime.ticks_ms()
-            if virtual_sensor:
-                # Generate random temperature and humidity if virtual sensor is used
-                temperature = random.randint(1, 50) 
-                humidity = random.randint(10, 70)
-            else:
-                try:
-                    # Measure temperature and humidity
-                    sensor.measure()
-                except:
-                    pass
-                # Read temperature and humidity
-                temperature = sensor.temperature()
-                humidity = sensor.humidity()
         
-            # Create payload for temperature
-            # Create payload for temperature
-            payload_temp = json.dumps({  # Dictionary containing temperature data
-                "data": [  # List containing temperature data
-                    {
-                        "variable": "temperature",  # Variable identifier for temperature
-                        "value": temperature,  # Temperature value
-                        "timestamp": 0  # Not used in this example
-                    }
-                ]
-            })
-            print(f"Temperature :{temperature}°C")  # Print temperature
-            client.publish(PUBLISH_TOPIC ,payload_temp,qos=0)  # Publish temperature payload
-            
-            payload_hum = json.dumps({  # Dictionary containing humidity data
-                "data": [  # List containing humidity data
-                    {
-                        "variable": "humidity",  # Variable identifier for humidity
-                        "value": humidity,  # Humidity value
-                        "timestamp": 0  # Not used in this example
-                    }
-                ]
-            })
-            print(f"Humidity :{humidity}%")  # Print humidity
-            client.publish(PUBLISH_TOPIC ,payload_hum,qos=0)  # Publish humidity payload
         if False:  # Example of blocking wait for message
             client.wait_msg()
         else:  # Example of non-blocking wait for message
@@ -178,9 +167,9 @@ def connect_to_wifi(ssid, password):
     else:
         print('Failed to connect to WiFi network.')
 
-def sub_cb(topic, msg):
+def callback(topic, msg):
     # Global variable to store command ID
-    global command_id
+    global command_id, command, data
 
     # Print the received message
     print(msg)
@@ -189,34 +178,6 @@ def sub_cb(topic, msg):
     command = json.loads(msg).get("command")
     data = json.loads(msg).get("data")
     command_id = json.loads(msg).get("commandId")
-
-    # If the command is "Light" or "light"
-    if command == "Light" or command == "light":
-        # If the data is "on" or "ON"
-        if data == "on" or data == "ON":
-            # Turn the light on
-            light.value(1)
-            print("Light ON")
-
-        # If the data is "off" or "OFF"
-        if data == "off" or data == "OFF":
-            # Turn the light off
-            print("Light OFF")
-            light.value(0)
-
-    # If the command is "Fan" or "fan"
-    if command == "Fan" or command == "fan":
-        # If the data is "on" or "ON"
-        if data == "on" or data == "ON":
-            # Turn the fan on
-            fan.value(1)
-            print("Fan ON")
-
-        # If the data is "off" or "OFF"
-        if data == "off" or data == "OFF":
-            # Turn the fan off
-            fan.value(0)
-            print("Fan OFF")
 
 if __name__ == '__main__':
     # Call the main function
