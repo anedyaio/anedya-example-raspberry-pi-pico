@@ -30,18 +30,21 @@ from dht import DHT11
 # Emulate Hardware Sensor?
 virtual_sensor = True
 
+# ----------------------- anedya essentials credentials --------------------------------
 REGION_CODE = "ap-in-1"  # Anedya region code (e.g., "ap-in-1" for Asia-Pacific/India) | For other country code, visity [https://docs.anedya.io/device/#region]
 CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
 PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
-# WiFi Credentials
+#  ----------------WiFi Credentials-----------------------
 SSID = "SSID"  # SSID of the WiFi network
 PASSWORD = "PASSWORD"  # Password of the WiFi network
 
-# Sensor Pin
+# -------------------------- sensors config --------------------------------
 dataPin = 16
 myPin = Pin(dataPin, Pin.OUT, Pin.PULL_DOWN)  # Initialize sensor pin
 sensor = DHT11(myPin)
 
+
+# ----------------------- helper variables --------------------------------
 global mqtt_client
 time_res = ""
 
