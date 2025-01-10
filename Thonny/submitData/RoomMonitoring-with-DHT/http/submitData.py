@@ -1,3 +1,22 @@
+""""
+                            Room Monitoring Using Raspberry pi pico + DHT sensor (http)
+                Disclaimer: This code is for hobbyists for learning purposes. Not recommended for production use!!
+
+                            # Dashboard Setup
+                             - Create account and login to the dashboard
+                             - Create new project.
+                             - Create variables: temperature and humidity.
+                             - Create a node (e.g., for home- Room1 or study room).
+                            Note: Variable Identifier is essential; fill it accurately.
+
+                            # Hardware Setup
+                             - connect the dht sensor to pin 16
+
+                  Note: The code is tested on the "Raspberry Pi Pico W"
+
+                                                                                           Dated: 3-July-2024
+
+"""
 import network
 import urequests as requests
 import ujson as json
@@ -7,18 +26,21 @@ import random
 from dht import DHT11
 from machine import Pin
 
+#--------------------------------- settings --------------------------------
 # Emulate Hardware Sensor?
-virtual_sensor = False
+virtual_sensor = True
 
-REGION_CODE="ap-in-1"
-CONNECTION_KEY = "CONNECTION_KEY"
-PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"
-# WiFi credentials
-SSID = 'ssid'
-PASSWORD = 'password'
+# ----------------------- anedya essentials credentials --------------------------------
+REGION_CODE = "ap-in-1"  # Anedya region code (e.g., "ap-in-1" for Asia-Pacific/India) | For other country code, visity [https://docs.anedya.io/device/#region]
+CONNECTION_KEY = b"CONNECTION_KEY"  # Fil your Connection Key
+PHYSICAL_DEVICE_ID = "PHYSICAL_DEVICE_ID"  # Fill your unique Physical Device ID
+#  ----------------WiFi Credentials-----------------------
+SSID = "SSID"  # SSID of the WiFi network
+PASSWORD = "PASSWORD"  # Password of the WiFi network
 
-dataPin=16
-myPin=Pin(dataPin,Pin.OUT,Pin.PULL_DOWN)
+#---------------------------- sensor config --------------------------------
+dht_pin=16
+myPin=Pin(dht_pin,Pin.OUT,Pin.PULL_DOWN)
 sensor=DHT11(myPin)
 
 def main():
@@ -26,7 +48,6 @@ def main():
     anedya_set_device_time()
 
     while True :
-        
         if virtual_sensor:
             temperature = random.randint(1, 50) 
             humidity =random.randint(10, 70)
@@ -43,7 +64,6 @@ def main():
         print(f"Temperature :{temperature}°C")
         anedya_submitData("temperature",temperature)
 
-        
         time.sleep(2)
 
 def connect_to_wifi(ssid, password):
@@ -130,7 +150,7 @@ def anedya_submitData(param_variable_identifier: str, param_variable_value: floa
 
     # Optional: Print the response for debugging
     if response.status_code == 200:
-        print("Data pushed to anedya could!!")
+        print("Data pushed to anedya cloud!!")
     else:
         print("Failed to push data!!")
         error_code=json.loads(response.text).get('errorcode')

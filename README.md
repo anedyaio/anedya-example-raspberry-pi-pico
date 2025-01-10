@@ -5,15 +5,7 @@
 <p align="center">
     <img src="https://cdn.anedya.io/anedya_black_banner.png" alt="Logo">
 </p>
-This repository contains example projects for the PICO W Board  utilizing the Anedya APIs. Anedya is a comprehensive cloud platform that offers Platform as a Service (PaaS) for IoT applications. It covers all aspects, including device lifecycle management, data storage, alerts, and data aggregation in a single platform. Anedya simplifies the integration of IoT hardware with the server and eliminates the burden of IoT cloud infrastructure development and management.
-
-## Examples Included:
-
-The examples demonstrate how to utilize Anedya with Esp32 microcontroller serise:
-
-### Arduino-IDE
-- Data submission and visualization on the Anedya cloud via HTTP.
-
+This repository contains example projects for the Pico W Board  utilizing the Anedya APIs. Anedya is a comprehensive cloud platform that offers Infrastructure as a Service (IaaS) for IoT applications. It covers all aspects, including device lifecycle management, data storage, alerts, and data aggregation in a single platform. Anedya simplifies the integration of IoT hardware with the server and eliminates the burden of IoT cloud infrastructure development and management.
 
 ## Getting Started
 
@@ -29,7 +21,7 @@ For detailed documentation, refer to the official documentation [here](https://d
 
 ## License
 
-This project is licensed under the [MIT License](https://github.com/anedyaio/anedya-example-esp32/blob/development/LICENSE).
+This project is licensed under the [MIT License](https://github.com/anedyaio/anedya-example-raspberry-pi-pico/blob/development/LICENSE).
 
 
 > [!TIP]

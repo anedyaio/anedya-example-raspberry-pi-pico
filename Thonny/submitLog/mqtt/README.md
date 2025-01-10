@@ -1,8 +1,20 @@
 [<img src="https://img.shields.io/badge/Anedya-Documentation-blue?style=for-the-badge">](https://docs.anedya.io?utm_source=github&utm_medium=link&utm_campaign=github-examples&utm_content=pico)
 
-# Room Monitoring - Submit-data-with-Pico+DHT (http)
+# Room Monitoring - Pico W+DHT (Submit-Log) (mqtt)
 
-This micro-python script allows you to connect your device to a WiFi network and send data to a server. It fetches the live time from the anedya server to synchronize the device time and sends data to the anedya.
+This micropython script allows you to submit your device log to the Anedya.
+
+## Getting Started
+
+To get started with the examples:
+
+1. Choose the code, create the .py file, and upload it in the pico space.
+2. Fill in your Wi-Fi credentials, physical device ID, and connection key (obtained from the dashboard).
+3. Upload the .cer file(Anedya ca-certificate) in the certs folder of pico. Obtain it from Anedya Documentation, [click here](https://docs.anedya.io/device/mqtt-endpoints/#tls)
+   - Download `Anedya Root CA 1 (RSA - 2048)` `DER` file.
+   - move it from Download folder to `C:\certs` in you local pc c drive.
+   ![upload-doc](/Thonny/submitLog/mqtt/doc/upload_cert_pico.png)
+   - Now, open thonny and upload cert folder in pico space.
 
 ## Set-Up Project in Anedya Dashboard
 
@@ -18,6 +30,12 @@ Following steps outline the overall steps to setup a project. You can read more 
 
 > [!IMPORTANT]
 > Variable Identifier is essential; fill it accurately.
+
+## USAGES
+To submit the the log, use : 
+```
+anedya_submitLog("<REQUEST-ID>","<LOG-MESSAGE>","<Log Type>");
+```
 
 ## Hardware Set-Up
 
