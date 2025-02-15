@@ -170,7 +170,7 @@ def callback(topic, msg):
     if res_json.get("serverReceiveTime"):
         time_res = msg
     else:
-        if res_json.get("errCode") == 0:
+        if res_json.get("errorcode") == 0:
             print("value set!!")
         else:
             print("Failed to push data to Anedya!!")

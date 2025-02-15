@@ -165,7 +165,7 @@ def callback(topic, msg):
         time_res = msg
         # print(msg)
     else:
-        if res_json.get("errCode") == 0:
+        if res_json.get("errorcode") == 0:
             print("Data pushed to Anedya!!")
         else:
             print("Failed to push data to Anedya!!")
